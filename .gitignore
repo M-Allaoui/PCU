@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PyCharm
+.idea/
+
+# Environments
+venv/
+.venv/
+env/
+conda-meta/
+
+# Results and temporary outputs
+results/
+outputs/
+logs/
+runs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.joblib
+*.npy
+*.npz
+
+# System files
+.DS_Store
+Thumbs.db
