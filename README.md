@@ -24,28 +24,16 @@ This repository provides a clean implementation of PCU and a runner for the 10 r
 - Saves per-seed JSON logs and anomaly-score arrays.
 
 ---
+## Method Summary
 
-## Repository Structure
+Given nominal training data, PCU trains an encoder using a ladder of controlled perturbations. The objective combines:
 
-```text
-PCU/
-├── PCU.py
-├── run_pcu_adbench10.py
-├── _global.json
-├── README.md
-├── .gitignore
-└── ADBench_10_Datasets/
-    ├── WDBC.npz
-    ├── Ionosphere.npz
-    ├── Wilt.npz
-    ├── annthyroid.npz
-    ├── cover.npz
-    ├── http.npz
-    ├── letter.npz
-    ├── optdigits.npz
-    ├── pendigits.npz
-    └── thyroid.npz
-````
+1. Ranked-sensitivity loss, which encourages latent displacement to increase with perturbation magnitude.
+2. Scale-regression loss, which trains a scale head to estimate the injected perturbation magnitude.
+3. Variance-covariance regularization, which stabilizes the latent geometry and prevents collapse.
+4. EMA prototype tracking, which provides a nominal reference point in representation space.
+
+At test time, PCU computes a final anomaly score from standardized scale response, prototype deviation, and tiny-noise sensitivity.
 
 ---
 
@@ -216,27 +204,6 @@ _global.json
 
 ---
 
-## Method Summary
-
-Given nominal training data, PCU trains an encoder using a ladder of controlled perturbations. The objective combines:
-
-1. Ranked-sensitivity loss, which encourages latent displacement to increase with perturbation magnitude.
-2. Scale-regression loss, which trains a scale head to estimate the injected perturbation magnitude.
-3. Variance-covariance regularization, which stabilizes the latent geometry and prevents collapse.
-4. EMA prototype tracking, which provides a nominal reference point in representation space.
-
-At test time, PCU computes a final anomaly score from standardized scale response, prototype deviation, and tiny-noise sensitivity.
-
----
-
-## Notes on Perturbations
-
-The current implementation uses additive Gaussian perturbations, which are most appropriate for standardized continuous or approximately continuous features.
-
-For mixed, binary, ordinal, or categorical tabular data, feature-type-aware perturbation ladders may be more appropriate. This repository provides the Gaussian instantiation used in the main experiments.
-
----
-
 ## Citation
 
 If you use this repository in your research, please cite:
@@ -248,5 +215,4 @@ If you use this repository in your research, please cite:
   booktitle = {Proceedings of the Conference on Uncertainty in Artificial Intelligence},
   year      = {2026}
 }
-```
 ```
