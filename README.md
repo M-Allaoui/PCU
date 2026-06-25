@@ -1,4 +1,3 @@
-````markdown
 # PCU: Perturbation-Calibrated Uncertainty for Unsupervised Anomaly Detection
 
 PCU is a representation-learning framework for unsupervised anomaly detection.  
@@ -249,13 +248,5 @@ If you use this repository in your research, please cite:
   booktitle = {Proceedings of the Conference on Uncertainty in Artificial Intelligence},
   year      = {2026}
 }
-```
-
----
-
-## Contact
-
-For questions or issues, please open an issue in this repository.
-
 ```
 ```
